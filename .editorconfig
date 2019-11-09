@@ -1,0 +1,8 @@
+# Code formatting styles
+# Checkout http://editorconfig.org/ for more information and how to use it
+
+[*]
+charset = utf-8
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = false
