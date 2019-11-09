@@ -1,7 +1,7 @@
 # OrientDB project
 
 ## Docker
-You can [OrientDB](https://orientdb.com/) for this project via [Docker](https://docs.docker.com/).
+You can run [OrientDB](https://orientdb.com/) for this project via [Docker](https://docs.docker.com/).
 
 In `bash` you can:
 * building and starting container - `bash bin/docker.sh start`
