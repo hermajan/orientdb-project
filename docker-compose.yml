@@ -1,0 +1,21 @@
+version: "3.1"
+
+networks:
+    docker_network:
+        driver: bridge
+
+services:
+    orientdb:
+        image: orientdb # https://hub.docker.com/_/orientdb/
+        container_name: orientdb
+        networks:
+            - docker_network
+        ports:
+            - 2424:2424
+            - 2480:2480
+        volumes:
+            - ./orientdb/config:/orientdb/config
+            - ./orientdb/databases:/orientdb/databases
+            - ./orientdb/backup:/orientdb/backup
+        environment:
+            ORIENTDB_ROOT_PASSWORD: heslo
