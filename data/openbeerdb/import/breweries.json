@@ -1,0 +1,38 @@
+{
+	"source": {
+		"file": {
+			"path": "/orientdb/data/openbeerdb/csv/breweries.csv"
+		}
+	},
+	"extractor": {
+		"csv": {}
+	},
+	"transformers": [
+		{
+			"vertex": {
+				"class": "Brewery"
+			}
+		}
+	],
+	"loader": {
+		"orientdb": {
+			"dbURL": "plocal:../../../orientdb/databases/openbeerdb",
+			"dbType": "graph",
+			"classes": [
+				{
+					"name": "Brewery",
+					"extends": "V"
+				}
+			],
+			"indexes": [
+				{
+					"class": "Brewery",
+					"fields": [
+						"id:integer"
+					],
+					"type": "UNIQUE"
+				}
+			]
+		}
+	}
+}

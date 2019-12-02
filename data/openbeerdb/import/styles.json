@@ -1,0 +1,45 @@
+{
+	"source": {
+		"file": {
+			"path": "/orientdb/data/openbeerdb/csv/styles.csv"
+		}
+	},
+	"extractor": {
+		"csv": {}
+	},
+	"transformers": [
+		{
+			"vertex": {
+				"class": "Style"
+			}
+		}, {
+			"edge": {
+				"class": "HasCategory",
+				"joinFieldName": "cat_id",
+				"lookup": "Category.id"
+			}
+		}
+	],
+	"loader": {
+		"orientdb": {
+			"dbURL": "plocal:../../../orientdb/databases/openbeerdb",
+			"dbType": "graph",
+			"classes": [
+				{
+					"name": "Style",
+					"extends": "V"
+				}, {
+					"name": "HasCategory",
+					"extends": "E"
+				}
+			],
+			"indexes": [
+				{
+					"class": "Style",
+					"fields": ["id:integer"],
+					"type": "UNIQUE"
+				}
+			]
+		}
+	}
+}

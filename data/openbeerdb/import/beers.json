@@ -1,0 +1,73 @@
+{
+	"config": {
+		"haltOnError": false
+	},
+	"source": {
+		"file": {
+			"path": "/orientdb/data/openbeerdb/csv/beers.csv"
+		}
+	},
+	"extractor": {
+		"csv": {
+			"columns": [
+				"id", "brewery_id", "name", "cat_id", "style_id", "abv", "ibu", "srm", "upc", "filepath", "descript", "last_mod"
+			],
+			"columnsOnFirstLine": true
+		}
+	},
+	"transformers": [
+		{
+			"vertex": {
+				"class": "Beer"
+			}
+		}, {
+			"edge": {
+				"class": "HasCategory",
+				"joinFieldName": "cat_id",
+				"lookup": "Category.id"
+			}
+		}, {
+			"edge": {
+				"class": "HasBrewery",
+				"joinFieldName": "brewery_id",
+				"lookup": "Brewery.id"
+			}
+		}, {
+			"edge": {
+				"class": "HasStyle",
+				"joinFieldName": "style_id",
+				"lookup": "Style.id"
+			}
+		}
+	],
+	"loader": {
+		"orientdb": {
+			"dbURL": "plocal:../../../orientdb/databases/openbeerdb",
+			"dbType": "graph",
+			"classes": [
+				{
+					"name": "Beer",
+					"extends": "V"
+				}, {
+					"name": "HasCategory",
+					"extends": "E"
+				}, {
+					"name": "HasStyle",
+					"extends": "E"
+				}, {
+					"name": "HasBrewery",
+					"extends": "E"
+				}
+			],
+			"indexes": [
+				{
+					"class": "Beer",
+					"fields": [
+						"id:integer"
+					],
+					"type": "UNIQUE"
+				}
+			]
+		}
+	}
+}
